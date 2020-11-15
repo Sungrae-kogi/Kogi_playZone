@@ -8,7 +8,7 @@ def dfs(graph, v, visited):
             dfs(graph,i,visited)
 
 
-graph = [
+graph = [       # 연결된 노드 번호들
     [],
     [2,3,8],
     [1,7],
@@ -20,6 +20,6 @@ graph = [
     [1,7]
     ]
 
-visited = [FALSE]*9
+visited = [False]*9
 
 dfs(graph, 1, visited)
