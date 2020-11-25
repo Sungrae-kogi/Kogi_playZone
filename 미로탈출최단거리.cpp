@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 #include <queue>
 #include <math.h>
@@ -17,30 +17,30 @@ int bfs(int x, int y) {
 	queue<pair<int, int>> q;
 	q.push({ x,y });
 
-	//queue°¡ ºô¶§±îÁö ¹İº¹
+	//queueê°€ ë¹Œë•Œê¹Œì§€ ë°˜ë³µ
 	while (!q.empty()) {
 		int x = q.front().first;
 		int y = q.front().second;
 		q.pop();
-		//4 ¹æÇâÀ¸·ÎÀÇ È®ÀÎ
+		//4 ë°©í–¥ìœ¼ë¡œì˜ í™•ì¸
 		for (int i = 0; i < 4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			//¸ÊÀ» ³Ñ¾î°¡´Â°æ¿ì´Â ¹«½Ã
+			//ë§µì„ ë„˜ì–´ê°€ëŠ”ê²½ìš°ëŠ” ë¬´ì‹œ
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m)
 				continue;
-			//º®ÀÌ¾îµµ ¹«½Ã
+			//ë²½ì´ì–´ë„ ë¬´ì‹œ
 			if (graph[nx][ny] == 0)
 				continue;
-			//ÇØ´ç ³ëµå¸¦ Ã³À½ ¹æ¹®ÇÏ´Â °æ¿ì¿¡¸¸ ÃÖ´Ü °æ·Î°Å¸® ±â·Ï
+			//í•´ë‹¹ ë…¸ë“œë¥¼ ì²˜ìŒ ë°©ë¬¸í•˜ëŠ” ê²½ìš°ì—ë§Œ ìµœë‹¨ ê²½ë¡œê±°ë¦¬ ê¸°ë¡
 			if (graph[nx][ny] == 1) {
 				graph[nx][ny] = graph[x][y] + 1;
-				q.push({ nx,ny });		//¹ß°ßÇÑ ´ÙÀ½³ëµå¸¦ queue¿¡ push
+				q.push({ nx,ny });		//ë°œê²¬í•œ ë‹¤ìŒë…¸ë“œë¥¼ queueì— push
 			}
 		}
 	}
 
-	return graph[n - 1][m - 1];	//0ºÎÅÍ ½ÃÀÛÇÏ´Ï±î ÃÖÁ¾µµÂøÁöÁ¡ ¿ìÃø¸Ç¾Æ·¡¸¦ ÀÇ¹Ì
+	return graph[n - 1][m - 1];	//0ë¶€í„° ì‹œì‘í•˜ë‹ˆê¹Œ ìµœì¢…ë„ì°©ì§€ì  ìš°ì¸¡ë§¨ì•„ë˜ë¥¼ ì˜ë¯¸
 }
 
 int main() {
