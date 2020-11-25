@@ -1,14 +1,14 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int check[7];	//³ëµå ¿¬°á¿ë, ¿¬°á³ëµå°¡ ¹Ù²î´ÂÁö Ã¼Å© 
+int check[7];	//ë…¸ë“œ ì—°ê²°ìš©, ì—°ê²°ë…¸ë“œê°€ ë°”ë€ŒëŠ”ì§€ ì²´í¬ 
 
 class Edge {
 public:
-	int node[2];		//edge´Â µÎ Á¤Á¡(node)¿¡ ¿¬°áµÇ¾îÀÖ´Ù
+	int node[2];		//edgeëŠ” ë‘ ì •ì (node)ì— ì—°ê²°ë˜ì–´ìžˆë‹¤
 	int distance;
 	Edge(int a, int b, int distance) {
 		this->node[0] = a;
@@ -16,7 +16,7 @@ public:
 		this->distance = distance;
 	}
 
-	//°£¼±À» ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÒ¶§ ±âÁØÀ» distance·Î Á¤ÇØÁÝ´Ï´Ù.  ¿¬»êÀÚ ¿À¹ö·Îµù
+	//ê°„ì„ ì„ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í• ë•Œ ê¸°ì¤€ì„ distanceë¡œ ì •í•´ì¤ë‹ˆë‹¤.  ì—°ì‚°ìž ì˜¤ë²„ë¡œë”©
 	bool operator<(Edge& edge) {						// if(a<b) equals if(a.operator<(b))
 		return this->distance < edge.distance;
 	}
@@ -27,7 +27,7 @@ int getParent(int node) {
 	return getParent(check[node]);
 }
 
-//µÎ ³ëµå¸¦ ÀÛÀº°ªÀ» ±âÁØÀ¸·Î ¿¬°áÇÕ´Ï´Ù. 
+//ë‘ ë…¸ë“œë¥¼ ìž‘ì€ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ì—°ê²°í•©ë‹ˆë‹¤. 
 void unionParent(int node1, int node2) {
 	node1 = getParent(node1);
 	node2 = getParent(node2);
@@ -35,7 +35,7 @@ void unionParent(int node1, int node2) {
 	else check[node1] = node2;
 }
 
-//½ÎÀÌÅ¬ÀÌ Á¸ÀçÇÏ¸é true, ¾Æ´Ï¸é false¸¦ ¹ÝÈ¯
+//ì‹¸ì´í´ì´ ì¡´ìž¬í•˜ë©´ true, ì•„ë‹ˆë©´ falseë¥¼ ë°˜í™˜
 bool isCycle(int node1, int node2) {
 	node1 = getParent(node1);
 	node2 = getParent(node2);
@@ -44,7 +44,7 @@ bool isCycle(int node1, int node2) {
 }
 
 int main() {
-	//µÎ ³ëµå¸¦ ¿¬°áÇÒ °£¼±À» Á¤ÇØÁÝ´Ï´Ù. 
+	//ë‘ ë…¸ë“œë¥¼ ì—°ê²°í•  ê°„ì„ ì„ ì •í•´ì¤ë‹ˆë‹¤. 
 	vector<Edge> v;
 	v.push_back(Edge(1, 7, 12));
 	v.push_back(Edge(1, 4, 23));
@@ -58,23 +58,23 @@ int main() {
 	v.push_back(Edge(4, 7, 20));
 	v.push_back(Edge(5, 6, 30));
 
-	//°£¼±À» ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÕ´Ï´Ù. 
+	//ê°„ì„ ì„ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•©ë‹ˆë‹¤. 
 	sort(v.begin(), v.end());
 
-	//°¢ ³ëµå´Â ÀÚ±âÀÚ½ÅÀÌ ºÎ¸ð·Î ÃÊ±âÈ­ÇØÁÝ´Ï´Ù. 
+	//ê° ë…¸ë“œëŠ” ìžê¸°ìžì‹ ì´ ë¶€ëª¨ë¡œ ì´ˆê¸°í™”í•´ì¤ë‹ˆë‹¤. 
 	for (int i = 1; i <= 7; ++i) {
 		check[i] = i;
 	}
 
 	int sum = 0;
 	for (int i = 0; i < v.size(); ++i) {
-		//½ÎÀÌÅ¬ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é ºñ¿ëÀ» ´õÇÕ´Ï´Ù. 
-		if (!isCycle(v[i].node[0], v[i].node[1])) {	//¿À¸§Â÷¼øÀ¸·Î ÀÛÀº°ÅºÎÅÍ Á¤·ÄµÈ°Å¸¦ ²¨³¾°ÅÀÓ 
+		//ì‹¸ì´í´ì´ ì¡´ìž¬í•˜ì§€ ì•Šìœ¼ë©´ ë¹„ìš©ì„ ë”í•©ë‹ˆë‹¤. 
+		if (!isCycle(v[i].node[0], v[i].node[1])) {	//ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ìž‘ì€ê±°ë¶€í„° ì •ë ¬ëœê±°ë¥¼ êº¼ë‚¼ê±°ìž„ 
 			sum += v[i].distance;
 			unionParent(v[i].node[0], v[i].node[1]);
 		}
-		//½ÎÀÌÅ¬ÀÌ Á¸ÀçÇÏ¸é ¾Æ¹«°Íµµ¾ÈÇÔ	 >> ¹«½¼¶æÀÌ³Ä -> n°³ÀÇ vertices¿¡¼­ n-1°³ÀÇ ÃÖ¼Ò°¹¼öÀÇ edges°¡ ´õÇØÁø ÀÌÈÄ¿¡´Â
-		//¹«Á¶°Ç cycleÀÌ »ý±æ¼ö¹Û¿¡¾øÀ½, µû¶ó¼­ ÀÚµ¿À¸·Î n-1°³ Ã¤¿öÁö¸é ±×µÚ·Ð ¾Æ¹«°Íµµ ½ÇÇàÀÌ¾ÈµÊ cycleÀÌ ¹»ÇÏ´ø »ý¼ºµÇ´Ï±î
+		//ì‹¸ì´í´ì´ ì¡´ìž¬í•˜ë©´ ì•„ë¬´ê²ƒë„ì•ˆí•¨	 >> ë¬´ìŠ¨ëœ»ì´ëƒ -> nê°œì˜ verticesì—ì„œ n-1ê°œì˜ ìµœì†Œê°¯ìˆ˜ì˜ edgesê°€ ë”í•´ì§„ ì´í›„ì—ëŠ”
+		//ë¬´ì¡°ê±´ cycleì´ ìƒê¸¸ìˆ˜ë°–ì—ì—†ìŒ, ë”°ë¼ì„œ ìžë™ìœ¼ë¡œ n-1ê°œ ì±„ì›Œì§€ë©´ ê·¸ë’¤ë¡  ì•„ë¬´ê²ƒë„ ì‹¤í–‰ì´ì•ˆë¨ cycleì´ ë­˜í•˜ë˜ ìƒì„±ë˜ë‹ˆê¹Œ
 	}
 
 	printf("%d\n", sum);
